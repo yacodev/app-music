@@ -1,28 +1,63 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <section class="section">
+      <nav class="navbar has-shadow">
+        <div class="container">
+          <input
+            type="text"
+            class="input is-large"
+            placeholder="buscar canciones"
+            v-model="searchQuery"
+            >
+          <button href="" class="button is-info is-large" @click="search">Buscar</button>
+          <button href="" class="button is-danger is-large">times</button>
+        </div>
+        <div class="container">
+          <p>{{ searchMessage }}</p>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="columns">
+          <div class="column"
+            v-for="track in tracks"
+            :key="track.name">
+            {{ track.name}} - {{track.artists[0].name}}
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import trackService from './services/track'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      searchQuery: '',
+      tracks: []
+    }
+  },
+  computed: {
+    searchMessage () {
+      return `Econtrados ${this.tracks.length}`
+    }
+  },
+  methods: {
+    search () {
+      if (!this.searchQuery) return
+      trackService.search(this.searchQuery)
+        .then(res => {
+          this.tracks = res.tracks.items
+        })
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "./scss/main.scss";
+
 </style>
