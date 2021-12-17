@@ -3,12 +3,15 @@
     <div class="hero-head">
       <header class="nav">
         <div class="container">
-          <div class="nav-start">
+          <div class="nav-left">
             <div class="nav-item">
               <strong> Platzi Music</strong>
             </div>
           </div>
-          <div class="nav-end nav-menu"></div>
+          <div class="nav-right nav-menu">
+            <router-link class="nav-item" to="/">Buscar</router-link>
+            <router-link class="nav-item" to="about">Nosotros</router-link>
+          </div>
         </div>
       </header>
     </div>
