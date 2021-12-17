@@ -8,7 +8,7 @@
         {{ track.name }}
       </strong>
       <small>
-        {{ track.duration_ms }}
+        {{ track.duration_ms | ms-to-mm}}
       </small>
     </p>
     <p>

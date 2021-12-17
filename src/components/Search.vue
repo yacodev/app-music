@@ -12,6 +12,7 @@
             class="input is-large"
             placeholder="buscar canciones"
             v-model="searchQuery"
+            v-on:keyup.enter="search"
             >
           <button href="" class="button is-info is-large" @click="search">Buscar</button>
           <button href="" class="button is-danger is-large">times</button>
@@ -24,8 +25,9 @@
         <div class="columns is-multiline">
           <div class="column is-one-quarter"
             v-for="track in tracks"
-            :key="track.name">
+            :key="`${track.name} ${track.artists}`">
             <pm-track
+              v-blur="track.preview_url"
               :track="track"
               @select="setSeletedTrack"
               :class="{'is-active': track.id === selectedTrack}"
